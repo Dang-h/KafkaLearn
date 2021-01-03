@@ -22,8 +22,8 @@ public class MySeekConsumer {
         try {
             TopicPartition seekToEndPartition = new TopicPartition("mySecondTopic", 1);
             consumer.assign(Arrays.asList(seekToEndPartition));
-            // seekToEnd
-            consumer.seekToEnd(Arrays.asList(seekToEndPartition));
+            // seek,begin consume from offset of 10
+            consumer.seek(seekToEndPartition, 10);
 
             ConsumerRecords<String, Byte[]> records = consumer.poll(1000);
 
