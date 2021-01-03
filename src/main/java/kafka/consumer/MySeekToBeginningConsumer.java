@@ -20,8 +20,8 @@ public class MySeekToBeginningConsumer {
         KafkaConsumer<String, Byte[]> consumer = new KafkaConsumer<String, Byte[]>(properties);
 
         try {
-            TopicPartition seekToEndPartition = new TopicPartition("mySecondTopic", 1);
-            consumer.assign(Arrays.asList(seekToEndPartition));
+            TopicPartition seekToBeginningPartition = new TopicPartition("mySecondTopic", 1);
+            consumer.assign(Arrays.asList(seekToBeginningPartition));
 
             ConsumerRecords<String, Byte[]> records = consumer.poll(1000);
 
