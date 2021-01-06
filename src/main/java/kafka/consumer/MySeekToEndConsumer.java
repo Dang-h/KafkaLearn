@@ -8,6 +8,9 @@ import org.apache.kafka.common.TopicPartition;
 import java.util.Arrays;
 import java.util.Properties;
 
+/**
+ *
+ */
 public class MySeekToEndConsumer {
     public static void main(String[] args) {
         Properties properties = new Properties();

@@ -3,6 +3,8 @@ package kafka.producer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class MultiThreadProducer extends Thread {
@@ -11,9 +13,11 @@ public class MultiThreadProducer extends Thread {
 	private final String topic;
 	private final int messageNum2Send = 100;
 
-	public MultiThreadProducer(String topicName) {
+	public MultiThreadProducer(String topicName) throws IOException {
 		Properties kafkaProps = new Properties();
-		kafkaProps.put("bootstrap.servers", "localhost:9092");
+		InputStream resourceAsStream = ClassLoader.getSystemClassLoader()
+				.getResourceAsStream("kafkaProps.properties");
+		kafkaProps.load(resourceAsStream);
 		kafkaProps.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 		kafkaProps.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
@@ -38,7 +42,7 @@ public class MultiThreadProducer extends Thread {
 		producer.flush();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		for (int i = 0; i < 3; i++) {
 			new MultiThreadProducer("mySecondTopic").start();
 		}

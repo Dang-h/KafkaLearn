@@ -25,6 +25,7 @@ public class MySyncConsumer {
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(100);
                 for (ConsumerRecord<String, String> record : records) {
+                    // 业务处理
                     System.out.println("message: partition = " + record.partition() + " offset = " + record.offset() + " key = " + record.key() + " value = " + record.value());
                 }
                 // Sync-Commit
